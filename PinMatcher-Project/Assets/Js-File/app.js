@@ -34,8 +34,12 @@ const buttonContainer = document.getElementById("button-container");
 buttonContainer.addEventListener("click", function (event) {
   const digit = event.target.innerText;
   if (isNaN(digit)) {
-    //B handler
-    //C handler
+    //Backspace handler:
+    if (digit === "B") {
+      let valueGet = document.getElementById("typed-input-display").value;
+      document.getElementById("typed-input-display").value = valueGet.substr(0, valueGet.length - 1);
+    }
+    //Clear handler:
     if (digit === "C") {
       document.getElementById("typed-input-display").value = "";
     }
@@ -47,9 +51,11 @@ buttonContainer.addEventListener("click", function (event) {
 
 //Submit Button: Verified the tow display numbers is matching or not!
 function verifyInputNumber() {
-  const pin  = document.getElementById("pin-display").value;
+  const pin = document.getElementById("pin-display").value;
   const typedPin = document.getElementById("typed-input-display").value;
-  if (pin === typedPin) {
+  if (pin !== 4 && typedPin === "") {
+    alert("Please Enter 4 Digit Codes.");
+  } else if (pin === typedPin) {
     displayStyleSet("block", "none");
   } else {
     displayStyleSet("none", "block");
