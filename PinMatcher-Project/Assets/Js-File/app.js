@@ -1,31 +1,65 @@
 //Pin Generate Function:
-function pinGenerate() {
-  const randomPin = Math.random() * 10000;
-  const getPin = (randomPin + "").split(".")[0];
-  if (getPin.length === 4) {
+/** 
+  function RandomPinGenerate() {
+    const randomPin = Math.random() * 10000;
+    const getPin = (randomPin + "").split(".")[0];
+    if (getPin.length === 4) {
     return getPin;
-  } else {
-    return pinGenerate();
+    } else {
+      return RandomPinGenerate();
+    }
   }
-}
+*/
 
-/**
- * Pin Generate Alternate Function:
-function pinGenerate() {
+//Pin Generate Alternate Function:
+function RandomPinGenerate() {
   const randomPin = Math.floor(Math.random() * 10000);
   const getPin = randomPin + "";
   if (getPin.length === 4) {
     return getPin;
   } else {
-    return pinGenerate();
+    return RandomPinGenerate();
   }
 }
-*/
 
 //Pin Generator Button Function:
-const pinGeneratorButton = document.getElementById("pin-generator");
-pinGeneratorButton.addEventListener("click", function () {
+function pinGenerateButton() {
   //Display the Generated Pin:
   const pinDisplay = document.getElementById("pin-display");
-  pinDisplay.value = pinGenerate();
+  pinDisplay.value = RandomPinGenerate();
+}
+
+//Typed in Input Field section:
+const buttonContainer = document.getElementById("button-container");
+buttonContainer.addEventListener("click", function (event) {
+  const digit = event.target.innerText;
+  if (isNaN(digit)) {
+    //B handler
+    //C handler
+    if (digit === "C") {
+      document.getElementById("typed-input-display").value = "";
+    }
+  } else {
+    const typedInputDisplay = document.getElementById("typed-input-display");
+    typedInputDisplay.value = typedInputDisplay.value + digit;
+  }
 });
+
+//Submit Button: Verified the tow display numbers is matching or not!
+function verifyInputNumber() {
+  const pin  = document.getElementById("pin-display").value;
+  const typedPin = document.getElementById("typed-input-display").value;
+  if (pin === typedPin) {
+    displayStyleSet("block", "none");
+  } else {
+    displayStyleSet("none", "block");
+  }
+}
+
+//Display Style set Function:
+function displayStyleSet(correctMatch, wrongMatch) {
+  const correct = document.getElementById("correct-matching");
+  correct.style.display = correctMatch;
+  const wrong = document.getElementById("wrong-matching");
+  wrong.style.display = wrongMatch;
+}
