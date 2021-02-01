@@ -59,6 +59,7 @@ function verifyInputNumber() {
     displayStyleSet("block", "none");
   } else {
     displayStyleSet("none", "block");
+    howManyTryLeft();
   }
 }
 
@@ -68,4 +69,15 @@ function displayStyleSet(correctMatch, wrongMatch) {
   correct.style.display = correctMatch;
   const wrong = document.getElementById("wrong-matching");
   wrong.style.display = wrongMatch;
+}
+
+//How Many Try Left Function:
+function howManyTryLeft() {
+  let count = parseInt(document.getElementById("try-left").innerText - 1);
+  if (count >= 0) {
+    document.getElementById("try-left").innerText = count;
+  } else {
+    const submitButton = document.getElementById("submit-btn");
+    submitButton.disabled = "true";
+  }
 }
